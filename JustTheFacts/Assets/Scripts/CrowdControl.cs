@@ -15,6 +15,7 @@ public class CrowdControl : MonoBehaviour {
 	public float ignoreWeight;
 
 	// Constants for crowd repulsion formula (Helbing 2000)
+	public float wallAvoidance;
 	public float crA;
 	public float crB;
 	public float crk;
@@ -23,9 +24,8 @@ public class CrowdControl : MonoBehaviour {
 	// Private instance variables
 	private List<GameObject> crowd;
 	private int numPeople;
-	private float prevSpawnX;
-	private float prevMoveX;
 	private float topBoundY;
+	private float bottomBoundY;
 	private float rightBoundX;
 	private float leftBoundX;
 
@@ -36,6 +36,7 @@ public class CrowdControl : MonoBehaviour {
 		crowd = new List<GameObject> ();
 		numPeople = 0;
 		topBoundY = Camera.main.ViewportToWorldPoint(new Vector3(0, 1, 0)).y;
+		bottomBoundY = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, 0)).y;
 		rightBoundX = Camera.main.ViewportToWorldPoint (new Vector3 (1, 0, 0)).x;
 		leftBoundX = Camera.main.ViewportToWorldPoint (new Vector3 (0.5f, 0, 0)).x;
 		StartCoroutine (Spawn ());
@@ -45,43 +46,44 @@ public class CrowdControl : MonoBehaviour {
 	float fluct(float max) {
 		return Random.Range (max, -max);
 	}
+	
+
+	public void setInitalPosition(GameObject p) {
+		float boundsY = .3f * (topBoundY - bottomBoundY);
+		p.transform.position = new Vector3 (transform.position.x + fluct (crowdSpread), (transform.position.y - boundsY) + fluct (boundsY), transform.position.z);
+	}
 
 	IEnumerator Spawn () {
 		yield return new WaitForSeconds(crowdSpawnRate);
 
-		GameObject newPerson = (GameObject) Instantiate (person);
-		crowd.Add (newPerson);
-		numPeople++;
-		PersonControl pControl = newPerson.GetComponent<PersonControl>();
-		float radius = newPerson.GetComponent<CircleCollider2D>().radius;
-		do {
-			pControl.initialX = transform.position.x + fluct (crowdSpread);
-		} while (Mathf.Abs (pControl.initialX - prevSpawnX) < radius*2);
-		prevSpawnX = pControl.initialX;
-		newPerson.transform.position = new Vector3 (pControl.initialX, transform.position.y, transform.position.z);
-		newPerson.rigidbody2D.velocity = new Vector2(0f,speed);
-
 		if (numPeople < maxPeople) {
-			StartCoroutine (Spawn ());
+			GameObject newPerson = (GameObject)Instantiate (person);
+			crowd.Add (newPerson);
+			numPeople++;
+			PersonControl pControl = newPerson.GetComponent<PersonControl> ();
+			pControl.SetRandomType ();
+			setInitalPosition (newPerson);
+			newPerson.rigidbody2D.velocity = new Vector2 (0f, speed);
 		}
 
+		StartCoroutine (Spawn ());
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		List<GameObject> removeList = new List<GameObject> ();
 		foreach (GameObject p in crowd) {
 			// move all people from top of the screen back to bottom
-			if (p.transform.position.y > Camera.main.transform.position.y && !p.renderer.IsVisibleFrom(Camera.main)) {	
-				PersonControl pControl = p.GetComponent<PersonControl>();
-				pControl.SetRandomType ();
-				float radius = p.GetComponent<CircleCollider2D>().radius;
-				float moveX;
-				do {
-					moveX = transform.position.x + fluct (crowdSpread);
-				} while (Mathf.Abs (moveX - prevMoveX) < radius*2);
-				prevMoveX = moveX;
-				p.transform.position = new Vector3(moveX, transform.position.y-radius*3, transform.position.z);
+			float radius = p.GetComponent<CircleCollider2D>().radius;
+			if (p.transform.position.y > topBoundY+radius) {	
+				Destroy(p);
+				removeList.Add (p);
+				numPeople--;
 			}
+		}
+
+		foreach (GameObject r in removeList) {
+			crowd.Remove(r);
 		}
 	}
 	
@@ -90,7 +92,7 @@ public class CrowdControl : MonoBehaviour {
 		float dist = Mathf.Abs (p.transform.position.x - xBound);
 		float radius = p.GetComponent<CircleCollider2D> ().radius;
 		
-		float normScale = crA * Mathf.Exp ((radius-dist)/crB);
+		float normScale = crA*wallAvoidance * Mathf.Exp ((radius-dist)/crB);
 		if (dist <= radius) {
 			normScale += crk*(radius-dist);
 		}
@@ -109,12 +111,11 @@ public class CrowdControl : MonoBehaviour {
 	void FixedUpdate() {
 		foreach (GameObject p in crowd) {
 			// TODO: refactor
-			PersonControl pControl = p.GetComponent<PersonControl>();
 
 			// (1) DESIRED MOTION
 			Vector2 currVel = p.rigidbody2D.velocity;
 			Vector3 currPos = p.transform.position;
-			Vector3 desiredPos = new Vector3(pControl.initialX, topBoundY+1, 0);
+			Vector3 desiredPos = new Vector3(transform.position.x, topBoundY+5, 0);
 			Vector3 desiredDir3 = desiredPos-currPos;
 			desiredDir3.Normalize();
 			Vector2 desiredDir = new Vector2(desiredDir3.x, desiredDir3.y);

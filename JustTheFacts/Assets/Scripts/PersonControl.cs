@@ -11,13 +11,17 @@ public class PersonControl : MonoBehaviour {
 	}
 
 	public PersonType type;
+	
 
-	[HideInInspector]
-	public float initialX;
-
+	private float bottomBoundY;
+	private float radius;
+	private CrowdControl crowdControl;
+	
 	// Use this for initialization
 	void Start () {
-		
+		bottomBoundY = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, 0)).y;
+		radius = GetComponent<CircleCollider2D> ().radius;
+		crowdControl = GameObject.Find ("Crowd Control").GetComponent<CrowdControl> ();
 	}
 
 	public void SetRandomType() {

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 
 public class CrowdControl : MonoBehaviour {
@@ -8,11 +9,11 @@ public class CrowdControl : MonoBehaviour {
 	public GameObject person;
 	public int maxPeople; //TODO: make this variable
 	public float crowdSpread;
-	public float speed;
 	public float maxSpeed;
 	public float relaxationTime;
 	public float angleOfSight;
 	public float ignoreWeight;
+	public float fluctuationFactor;
 
 	// Constants for crowd repulsion formula (Helbing 2000)
 	public float wallAvoidance;
@@ -50,7 +51,7 @@ public class CrowdControl : MonoBehaviour {
 
 	public void setInitalPosition(GameObject p) {
 		float boundsY = .3f * (topBoundY - bottomBoundY);
-		p.transform.position = new Vector3 (transform.position.x + fluct (crowdSpread), (transform.position.y - boundsY) + fluct (boundsY), transform.position.z);
+		p.transform.position = new Vector3 (transform.position.x + fluct (crowdSpread), (transform.position.y + boundsY) - fluct (boundsY), transform.position.z);
 	}
 
 	IEnumerator Spawn () {
@@ -62,8 +63,9 @@ public class CrowdControl : MonoBehaviour {
 			numPeople++;
 			PersonControl pControl = newPerson.GetComponent<PersonControl> ();
 			pControl.SetRandomType ();
+			pControl.setRandomRole ();
 			setInitalPosition (newPerson);
-			newPerson.rigidbody2D.velocity = new Vector2 (0f, speed);
+			newPerson.rigidbody2D.velocity = new Vector2 (0f, pControl.speed);
 		}
 
 		StartCoroutine (Spawn ());
@@ -72,10 +74,17 @@ public class CrowdControl : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		List<GameObject> removeList = new List<GameObject> ();
+		crowd = crowd.OrderByDescending (t => t.transform.position.y).ToList ();
+		int sortingOrder = 0;
+
 		foreach (GameObject p in crowd) {
-			// move all people from top of the screen back to bottom
+			//TODO: move all people from top of the screen back to bottom
+			//(why did you get rid of this?)
+
+			sortingOrder++;
+			p.transform.GetChild(0).renderer.sortingOrder = sortingOrder;
 			float radius = p.GetComponent<CircleCollider2D>().radius;
-			if (p.transform.position.y > topBoundY+radius) {	
+			if (p.transform.position.y < bottomBoundY-radius) {	
 				Destroy(p);
 				removeList.Add (p);
 				numPeople--;
@@ -113,28 +122,32 @@ public class CrowdControl : MonoBehaviour {
 			// TODO: refactor
 
 			// (1) DESIRED MOTION
+			float pSpeed = p.GetComponent<PersonControl>().speed;
 			Vector2 currVel = p.rigidbody2D.velocity;
 			Vector3 currPos = p.transform.position;
-			Vector3 desiredPos = new Vector3(transform.position.x, topBoundY+5, 0);
+			Vector3 desiredPos = new Vector3(transform.position.x, bottomBoundY-5, 0);
 			Vector3 desiredDir3 = desiredPos-currPos;
 			desiredDir3.Normalize();
 			Vector2 desiredDir = new Vector2(desiredDir3.x, desiredDir3.y);
-			Vector2 deviation = speed*desiredDir - currVel;
+			Vector2 deviation = pSpeed*desiredDir - currVel;
 			p.rigidbody2D.AddForce((1f/relaxationTime)*deviation);
 
 			// (2) PEDESTRIAN AVOIDANCE
-			// TODO: if necessary, optimize by only scanning nearby pedestrians (kd tree?)
-			// TODO: weight based on if in front of or behind q
 			float pRad = p.GetComponent<CircleCollider2D>().radius;
 			foreach (GameObject q in crowd) {
 				if (p==q) {
 					continue;
 				}
 
-				float qRad = q.GetComponent<CircleCollider2D>().radius;
-				float sumRad = pRad+qRad;
 				Vector3 qCurrPos = q.transform.position;
 				float dist = (currPos-qCurrPos).magnitude;
+
+				if (dist > 4*pRad) {
+					continue;
+				}
+
+				float qRad = q.GetComponent<CircleCollider2D>().radius;
+				float sumRad = pRad+qRad;
 				float normScale = crA * Mathf.Exp ((sumRad-dist)/crB);
 				Vector2 norm = (currPos-qCurrPos)/dist;
 
@@ -165,7 +178,10 @@ public class CrowdControl : MonoBehaviour {
 			addWallForce (p, rightBoundX, new Vector2(-1f, 0f)); //right wall
 			addWallForce (p, leftBoundX, new Vector2(1f, 0f)); //left wall
 
-			// (4) VELOCITY CLAMPING
+			// (4) RANDOM FLUCTUATIONS
+			p.rigidbody2D.AddForce(new Vector2(fluct (fluctuationFactor), fluct (fluctuationFactor)));
+
+			// (5) VELOCITY CLAMPING
 			float currSpeed = p.rigidbody2D.velocity.magnitude;
 			if (currSpeed > maxSpeed) {
 				float adjust = maxSpeed/currSpeed;

@@ -5,17 +5,15 @@
 * Play with simulation some more
 	- Better optimization?
 	- Attractive forces?
-* Fix surprise not destroying bug
-	- Only happens when second is produced while not destroyed
 
 #### Paper headlines
-* Text generation
+* Text generation (implemented)
 * Dragging and flicking
 	- How are new headlines introduced?
 
 #### Tasks
 * Dragging one ped to another
-	- Assassinations
+	- Assassinations (implemented)
 	- Proposals
 * Natural disasters
  	- Indicate path
@@ -23,4 +21,4 @@
 
 #### Scoring
 * Penalties
-	- Deduction for time/inaccuracy/being noticed
+	- Deduction for time/inaccuracy/being noticed (implemented)

@@ -41,7 +41,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 400004}
   - 212: {fileID: 21200002}
-  - 95: {fileID: 9500000}
   m_Layer: 0
   m_Name: gunSprite
   m_TagString: Untagged
@@ -112,20 +111,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
---- !u!95 &9500000
-Animator:
-  serializedVersion: 2
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100004}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 25e6391cef8a0482d897fc721d27b869, type: 2}
-  m_CullingMode: 0
-  m_ApplyRootMotion: 1
-  m_AnimatePhysics: 0
-  m_HasTransformHierarchy: 1
 --- !u!95 &9500002
 Animator:
   serializedVersion: 2
@@ -151,7 +136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37bf9d2a8fb8d4a9c9b7207b0e5e7f69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: .300000012
+  radius: .200000003
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

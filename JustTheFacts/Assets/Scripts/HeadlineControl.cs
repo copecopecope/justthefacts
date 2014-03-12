@@ -3,18 +3,31 @@ using System.Collections;
 
 public class HeadlineControl : MonoBehaviour {
 
-	private PersonControl.PersonType currActorType;
-	private PersonControl.PersonRole currTargetRole;
+	public int initialScoreVal;
+	public int decreasePerSecond;
+	public int detectionPenalty;
+	public int wrongPenalty;
+
+	[HideInInspector]
+	public int currScoreVal;
+	[HideInInspector]
+	public int scoreVal;
+	[HideInInspector]
+	public bool updateHeadline;
+
+	[HideInInspector]
+	public PersonControl.PersonType currActorType;
+	[HideInInspector]
+	public PersonControl.PersonRole currTargetRole;
+
 	private string currHeadline;
-	private int currScoreVal;
-	private int scoreVal;
 
 	private GameObject headline;
 	private TextMesh headlineTextMesh;
 	private GameObject currScore;
 	private GameObject score;
 
-	//TODO: split into two files (headline and score?)
+	//TODO: split into two files (headline and score)
 
 	// Use this for initialization
 	void Start () {
@@ -22,13 +35,30 @@ public class HeadlineControl : MonoBehaviour {
 		headlineTextMesh = headline.GetComponent<TextMesh> ();
 		currScore = transform.Find ("newsScore").gameObject;
 		score = GameObject.Find ("score");
-		currScoreVal = 2000;
+		scoreVal = 0;
+		updateHeadline = true;
+		StartCoroutine (DecreaseScore(true));
+	}
+
+	IEnumerator DecreaseScore(bool initialPause) {
+		if (initialPause) {
+			yield return new WaitForSeconds (5f);
+		}
+		currScoreVal = Mathf.Max (0, currScoreVal-Mathf.RoundToInt(decreasePerSecond*.5f));
+		Debug.Log (currScoreVal);
+		yield return new WaitForSeconds (.5f);
+		StartCoroutine (DecreaseScore(false));
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		GenerateHeadline ();
+		if (updateHeadline) {
+			scoreVal += currScoreVal;
+			UpdateScoreText (scoreVal, score, 6);
+			GenerateHeadline ();
+		}
 		UpdateScoreText (currScoreVal, currScore, 5);
+
 	}
 
 	PersonControl.PersonType randomType() {
@@ -62,9 +92,13 @@ public class HeadlineControl : MonoBehaviour {
 	void GenerateHeadline() {
 		currActorType = randomType ();
 		currTargetRole = randomRole (true);
+		Debug.Log (currActorType);
 
 		currHeadline = currActorType.ToString () + " man kills " + currTargetRole.ToString();
 		currHeadline = currHeadline.ToUpper();
 		headlineTextMesh.text = currHeadline;
+
+		currScoreVal = initialScoreVal;
+		updateHeadline = false;
 	}
 }

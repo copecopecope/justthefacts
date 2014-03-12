@@ -6,7 +6,7 @@ public class PersonDetect : MonoBehaviour {
 	public GameObject surprise;
 	public float surpriseDist;
 	public float surpriseTime;
-	private GameObject sClone;
+	private HeadlineControl hlControl;
 
 	[HideInInspector]
 	public bool surprised;
@@ -15,6 +15,7 @@ public class PersonDetect : MonoBehaviour {
 	void Start () {
 		//TODO: refactor
 		surprised = false;
+		hlControl = GameObject.Find ("newspaper").GetComponent<HeadlineControl> ();
 	}
 	
 	// Update is called once per frame
@@ -22,11 +23,11 @@ public class PersonDetect : MonoBehaviour {
 	
 	}
 
-	IEnumerator RaiseAlert(Collider2D collider) {
-		sClone = (GameObject)Instantiate (surprise);
+	IEnumerator RaiseAlert(Collider2D collider, GameObject sClone) {
 		sClone.transform.parent = collider.transform.parent;
 		sClone.transform.localPosition = new Vector3 (0f, surpriseDist, 0f);
 		collider.GetComponent<PersonDetect> ().surprised = true;
+		hlControl.currScoreVal = Mathf.Max (0, hlControl.currScoreVal-hlControl.detectionPenalty);
 		yield return new WaitForSeconds (surpriseTime);
 		Destroy (sClone); 
 		collider.GetComponent<PersonDetect> ().surprised = false;
@@ -34,7 +35,8 @@ public class PersonDetect : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D collider) {
 		if (Camera.main.GetComponent<DragControl>().obj == gameObject.transform.parent.gameObject && collider.tag == "Person" && !collider.GetComponent<PersonDetect>().surprised) {
-			StartCoroutine(RaiseAlert(collider));
+			GameObject sClone = (GameObject)Instantiate (surprise);
+			StartCoroutine(RaiseAlert(collider, sClone));
 		}
 	}
 }

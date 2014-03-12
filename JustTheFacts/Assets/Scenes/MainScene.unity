@@ -103,7 +103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   crowdSpawnRate: .200000003
   person: {fileID: 100000, guid: a05e2fa9579aa46c4b31094ca9a71a0a, type: 2}
-  maxPeople: 50
+  maxPeople: 60
   crowdSpread: 3
   maxSpeed: 1.79999995
   relaxationTime: .100000001
@@ -115,6 +115,8 @@ MonoBehaviour:
   crB: 3
   crk: 25
   crK: 10
+  numPeople: 0
+  removeList: []
 --- !u!4 &302463789
 Transform:
   m_ObjectHideFlags: 0

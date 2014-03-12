@@ -5,10 +5,8 @@
 * Play with simulation some more
 	- Better optimization?
 	- Attractive forces?
-* Reverse direction and isometric view
-	- Rendering layer sorting
-	- Different dragging animation
 * Fix surprise not destroying bug
+	- Only happens when second is produced while not destroyed
 
 #### Paper headlines
 * Text generation

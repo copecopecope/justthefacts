@@ -12,6 +12,7 @@ GameObject:
   - 50: {fileID: 5000000}
   - 114: {fileID: 11400000}
   - 61: {fileID: 6100000}
+  - 114: {fileID: 11400006}
   m_Layer: 8
   m_Name: personContainer
   m_TagString: Person Container
@@ -171,6 +172,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91a64dcf819fa465cbfee060c8e25a8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11400006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efa6315b2a1b9457697bf250c7461f4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gun: {fileID: 100000, guid: 551d81bde7a364f138e47c90b9e704c4, type: 2}
+  gunPosition: {x: -2, y: 0, z: 0}
+  gunDestroyTime: .5
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

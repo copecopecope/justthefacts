@@ -24,7 +24,10 @@ public class CrowdControl : MonoBehaviour {
 
 	// Private instance variables
 	private List<GameObject> crowd;
-	private int numPeople;
+	[HideInInspector]
+	public int numPeople;
+	[HideInInspector]
+	public List<GameObject> removeList;
 	private float topBoundY;
 	private float bottomBoundY;
 	private float rightBoundX;
@@ -35,6 +38,7 @@ public class CrowdControl : MonoBehaviour {
 	void Start () {
 
 		crowd = new List<GameObject> ();
+		removeList = new List<GameObject>();
 		numPeople = 0;
 		topBoundY = Camera.main.ViewportToWorldPoint(new Vector3(0, 1, 0)).y;
 		bottomBoundY = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, 0)).y;
@@ -73,7 +77,6 @@ public class CrowdControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		List<GameObject> removeList = new List<GameObject> ();
 		crowd = crowd.OrderByDescending (t => t.transform.position.y).ToList ();
 		int sortingOrder = 0;
 
@@ -82,18 +85,19 @@ public class CrowdControl : MonoBehaviour {
 			//(why did you get rid of this?)
 
 			sortingOrder++;
-			p.transform.GetChild(0).renderer.sortingOrder = sortingOrder;
+			p.transform.Find ("person").renderer.sortingOrder = sortingOrder;
 			float radius = p.GetComponent<CircleCollider2D>().radius;
-			if (p.transform.position.y < bottomBoundY-radius) {	
-				Destroy(p);
-				removeList.Add (p);
-				numPeople--;
+			if (p.transform.position.y < bottomBoundY-radius*2) {	
+				p.GetComponent<PersonControl>().Kill ();
 			}
 		}
 
 		foreach (GameObject r in removeList) {
 			crowd.Remove(r);
+			Destroy (r);
 		}
+
+		removeList.Clear ();
 	}
 	
 	void addWallForce(GameObject p, float xBound, Vector2 norm) {
@@ -120,6 +124,7 @@ public class CrowdControl : MonoBehaviour {
 	void FixedUpdate() {
 		foreach (GameObject p in crowd) {
 			// TODO: refactor
+			// TODO: update every other frame??
 
 			// (1) DESIRED MOTION
 			float pSpeed = p.GetComponent<PersonControl>().speed;

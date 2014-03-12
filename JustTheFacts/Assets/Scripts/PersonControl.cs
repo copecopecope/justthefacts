@@ -13,7 +13,7 @@ public class PersonControl : MonoBehaviour {
 	public enum PersonRole
 	{
 		Normal,
-		Old,
+		Elder,
 		Celebrity,
 		Politician
 	}
@@ -23,7 +23,7 @@ public class PersonControl : MonoBehaviour {
 
 	// this is annoying...
 	public Sprite normal;
-	public float normalProb;
+	public static float normalProb;
 	public Sprite old;
 	public Sprite celeb;
 	public Sprite polit;
@@ -35,10 +35,12 @@ public class PersonControl : MonoBehaviour {
 	public float maxSpeed;
 
 	private GameObject child;
+	private CrowdControl cControl;
 	
 	// Use this for initialization
 	void Start () {
 		child = transform.GetChild (0).gameObject;
+		cControl = GameObject.Find ("Crowd Control").GetComponent<CrowdControl> ();
 		// TODO: Gaussitize
 		speed = Random.Range (minSpeed, maxSpeed);
 	}
@@ -58,6 +60,12 @@ public class PersonControl : MonoBehaviour {
 			PersonRole newRole = (PersonRole)values.GetValue (Random.Range (1, values.Length));
 			role = newRole;
 		}
+	}
+
+	public void Kill() {
+		//TODO: trigger death animation
+		cControl.numPeople--;
+		cControl.removeList.Add (gameObject);
 	}
 	
 	// Update is called once per frame
@@ -80,7 +88,7 @@ public class PersonControl : MonoBehaviour {
 			case PersonRole.Normal:
 				child.GetComponent<SpriteRenderer> ().sprite = normal;
 				break;
-			case PersonRole.Old:
+			case PersonRole.Elder:
 				child.GetComponent<SpriteRenderer> ().sprite = old;
 				break;
 			case PersonRole.Celebrity:

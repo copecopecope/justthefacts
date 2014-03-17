@@ -3,8 +3,9 @@
 #### Crowd Control
 * Enable multi-touch
 * Play with simulation some more
-	- Better optimization?
 	- Attractive forces?
+	- Different crk when dragged!
+* Switch to portrait view (implemented)
 
 #### Paper headlines
 * Text generation (implemented)
@@ -22,3 +23,10 @@
 #### Scoring
 * Penalties
 	- Deduction for time/inaccuracy/being noticed (implemented)
+
+#### Optimizations
+* Share materials to enable batching
+	- http://dmayance.com/unity-paint-part-2/
+	- http://docs.unity3d.com/Documentation/Manual/DrawCallBatching.html
+* Optimize crowd simulator
+	- Run physics update once every x frames

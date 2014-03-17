@@ -3,7 +3,8 @@ using System.Collections;
 
 public class GunControl : MonoBehaviour {
 
-	public float radius;
+//	public float radius;
+	public Vector2 boxSize;
 
 	// Use this for initialization
 	void Start () {
@@ -23,15 +24,15 @@ public class GunControl : MonoBehaviour {
 	}
 
 	public void Fire() {
-		Collider2D coll = Physics2D.OverlapCircle (new Vector2 (transform.position.x, transform.position.y), radius);
+//		Collider2D coll = Physics2D.OverlapCircle (new Vector2 (transform.position.x, transform.position.y), radius);
+		Collider2D coll = Physics2D.OverlapArea (new Vector2 (transform.position.x, transform.position.y - boxSize.y / 2), 
+		                                        new Vector2 (transform.position.x + boxSize.x, transform.position.y + boxSize.y / 2));
 		if (coll && coll.tag == "Person Container") {
 			HeadlineControl hlControl = GameObject.Find ("newspaper").GetComponent<HeadlineControl> ();
 			coll.GetComponent<PersonControl>().Kill ();
 			if (isCorrect (coll)) {
-				Debug.Log ("correct!");
 				GameObject.Find ("newspaper").GetComponent<HeadlineControl> ().updateHeadline = true;
 			} else {
-				Debug.Log ("incorrect!");
 				GameObject.Find ("newspaper").GetComponent<HeadlineControl> ().currScoreVal = Mathf.Max (0, hlControl.currScoreVal-hlControl.wrongPenalty);
 			}
 

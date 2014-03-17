@@ -14,6 +14,7 @@ public class CrowdControl : MonoBehaviour {
 	public float angleOfSight;
 	public float ignoreWeight;
 	public float fluctuationFactor;
+	public float roadPercent;
 
 	// Constants for crowd repulsion formula (Helbing 2000)
 	public float wallAvoidance;
@@ -40,10 +41,10 @@ public class CrowdControl : MonoBehaviour {
 		crowd = new List<GameObject> ();
 		removeList = new List<GameObject>();
 		numPeople = 0;
-		topBoundY = Camera.main.ViewportToWorldPoint(new Vector3(0, 1, 0)).y;
-		bottomBoundY = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, 0)).y;
+		topBoundY = Camera.main.ViewportToWorldPoint(new Vector3(0, .85f, 0)).y;
+		bottomBoundY = Camera.main.ViewportToWorldPoint(new Vector3(0, 1-roadPercent, 0)).y;
 		rightBoundX = Camera.main.ViewportToWorldPoint (new Vector3 (1, 0, 0)).x;
-		leftBoundX = Camera.main.ViewportToWorldPoint (new Vector3 (0.5f, 0, 0)).x;
+		leftBoundX = Camera.main.ViewportToWorldPoint (new Vector3 (0, 0, 0)).x;
 		StartCoroutine (Spawn ());
 	
 	}
@@ -54,8 +55,8 @@ public class CrowdControl : MonoBehaviour {
 	
 
 	public void setInitalPosition(GameObject p) {
-		float boundsY = .3f * (topBoundY - bottomBoundY);
-		p.transform.position = new Vector3 (transform.position.x + fluct (crowdSpread), (transform.position.y + boundsY) - fluct (boundsY), transform.position.z);
+		float boundsX = .3f * (rightBoundX - leftBoundX);
+		p.transform.position = new Vector3 ((transform.position.x - boundsX) + fluct (boundsX), transform.position.y + fluct (crowdSpread), transform.position.z);
 	}
 
 	IEnumerator Spawn () {
@@ -87,7 +88,7 @@ public class CrowdControl : MonoBehaviour {
 			sortingOrder++;
 			p.transform.Find ("person").renderer.sortingOrder = sortingOrder;
 			float radius = p.GetComponent<CircleCollider2D>().radius;
-			if (p.transform.position.y < bottomBoundY-radius*2) {	
+			if (p.transform.position.x > rightBoundX+radius*2) {	
 				p.GetComponent<PersonControl>().Kill ();
 			}
 		}
@@ -100,11 +101,11 @@ public class CrowdControl : MonoBehaviour {
 		removeList.Clear ();
 	}
 	
-	void addWallForce(GameObject p, float xBound, Vector2 norm) {
-		// NOTE: only works with walls defined on x-axis
-		float dist = Mathf.Abs (p.transform.position.x - xBound);
+	void addWallForce(GameObject p, float yBound, Vector2 norm) {
+		// NOTE: only works with walls defined on y-axis
+		float dist = Mathf.Abs (p.transform.position.y - yBound);
 		float radius = p.GetComponent<CircleCollider2D> ().radius;
-		
+
 		float normScale = crA*wallAvoidance * Mathf.Exp ((radius-dist)/crB);
 		if (dist <= radius) {
 			normScale += crk*(radius-dist);
@@ -130,7 +131,8 @@ public class CrowdControl : MonoBehaviour {
 			float pSpeed = p.GetComponent<PersonControl>().speed;
 			Vector2 currVel = p.rigidbody2D.velocity;
 			Vector3 currPos = p.transform.position;
-			Vector3 desiredPos = new Vector3(transform.position.x, bottomBoundY-5, 0);
+			Vector3 desiredPos = new Vector3(rightBoundX+5, transform.position.y, 0);
+			Debug.Log (desiredPos);
 			Vector3 desiredDir3 = desiredPos-currPos;
 			desiredDir3.Normalize();
 			Vector2 desiredDir = new Vector2(desiredDir3.x, desiredDir3.y);
@@ -180,8 +182,8 @@ public class CrowdControl : MonoBehaviour {
 			}
 
 			// (3) WALL AVOIDANCE
-			addWallForce (p, rightBoundX, new Vector2(-1f, 0f)); //right wall
-			addWallForce (p, leftBoundX, new Vector2(1f, 0f)); //left wall
+			addWallForce (p, bottomBoundY, new Vector2(0f, 1f)); //bottom wall
+			addWallForce (p, topBoundY, new Vector2(0f, -1f)); //top wall
 
 			// (4) RANDOM FLUCTUATIONS
 			p.rigidbody2D.AddForce(new Vector2(fluct (fluctuationFactor), fluct (fluctuationFactor)));

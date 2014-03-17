@@ -45,7 +45,6 @@ public class HeadlineControl : MonoBehaviour {
 			yield return new WaitForSeconds (5f);
 		}
 		currScoreVal = Mathf.Max (0, currScoreVal-Mathf.RoundToInt(decreasePerSecond*.5f));
-		Debug.Log (currScoreVal);
 		yield return new WaitForSeconds (.5f);
 		StartCoroutine (DecreaseScore(false));
 	}
@@ -92,7 +91,6 @@ public class HeadlineControl : MonoBehaviour {
 	void GenerateHeadline() {
 		currActorType = randomType ();
 		currTargetRole = randomRole (true);
-		Debug.Log (currActorType);
 
 		currHeadline = currActorType.ToString () + " man kills " + currTargetRole.ToString();
 		currHeadline = currHeadline.ToUpper();

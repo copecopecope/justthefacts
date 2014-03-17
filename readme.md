@@ -4,8 +4,6 @@
 * Enable multi-touch
 * Play with simulation some more
 	- Attractive forces?
-	- Different crk when dragged!
-* Switch to portrait view (implemented)
 
 #### Paper headlines
 * Text generation (implemented)

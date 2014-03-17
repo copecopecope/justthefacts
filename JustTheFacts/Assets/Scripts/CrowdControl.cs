@@ -21,6 +21,7 @@ public class CrowdControl : MonoBehaviour {
 	public float crA;
 	public float crB;
 	public float crk;
+	public float dragFactor;
 	public float crK;
 
 	// Private instance variables
@@ -125,14 +126,15 @@ public class CrowdControl : MonoBehaviour {
 	void FixedUpdate() {
 		foreach (GameObject p in crowd) {
 			// TODO: refactor
-			// TODO: update every other frame??
+
+			GameObject dragObj = Camera.main.GetComponent<DragControl>().obj;
+			bool isDragged = dragObj == p;
 
 			// (1) DESIRED MOTION
 			float pSpeed = p.GetComponent<PersonControl>().speed;
 			Vector2 currVel = p.rigidbody2D.velocity;
 			Vector3 currPos = p.transform.position;
 			Vector3 desiredPos = new Vector3(rightBoundX+5, transform.position.y, 0);
-			Debug.Log (desiredPos);
 			Vector3 desiredDir3 = desiredPos-currPos;
 			desiredDir3.Normalize();
 			Vector2 desiredDir = new Vector2(desiredDir3.x, desiredDir3.y);
@@ -151,7 +153,9 @@ public class CrowdControl : MonoBehaviour {
 
 				if (dist > 4*pRad) {
 					continue;
-				}
+				} // skip over pedestrians not nearby
+
+				bool qIsDragged = dragObj == q;
 
 				float qRad = q.GetComponent<CircleCollider2D>().radius;
 				float sumRad = pRad+qRad;
@@ -163,8 +167,12 @@ public class CrowdControl : MonoBehaviour {
 					weight = ignoreWeight;
 				}
 
+				float crk_ = crk;
+				if (isDragged || qIsDragged) {
+					crk_ *= dragFactor;
+				}
 				if (dist <= sumRad) {
-					normScale += crk*(sumRad-dist);
+					normScale += crk_*(sumRad-dist);
 				}
 
 				Vector2 normForce = new Vector2(weight*normScale*norm.x, weight*normScale*norm.y);

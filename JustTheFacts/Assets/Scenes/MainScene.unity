@@ -104,16 +104,18 @@ MonoBehaviour:
   crowdSpawnRate: .200000003
   person: {fileID: 100000, guid: a05e2fa9579aa46c4b31094ca9a71a0a, type: 2}
   maxPeople: 60
-  crowdSpread: 3
+  crowdSpread: 2
   maxSpeed: 1.79999995
   relaxationTime: .100000001
   angleOfSight: 1.30799997
   ignoreWeight: .100000001
   fluctuationFactor: 2
+  roadPercent: .699999988
   wallAvoidance: 5
   crA: .200000003
   crB: 3
-  crk: 25
+  crk: 5
+  dragFactor: 6
   crK: 10
   numPeople: 0
   removeList: []
@@ -124,7 +126,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 302463787}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5, y: 6, z: 0}
+  m_LocalPosition: {x: -6.21890879, y: 1.08978081, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -174,7 +176,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 828403656}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: .0268642306, z: 5}
+  m_LocalPosition: {x: -1.90734863e-06, y: -2.40777779, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1126472694}
@@ -295,8 +297,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1117868685}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.20773077, y: -3.82366085, z: 0}
-  m_LocalScale: {x: .425342768, y: .425342768, z: .425342768}
+  m_LocalPosition: {x: .00241279602, y: -4.67998648, z: 0}
+  m_LocalScale: {x: .288848221, y: .288848221, z: .288848221}
   m_Children:
   - {fileID: 1801742096}
   - {fileID: 1040775837}
@@ -414,8 +416,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1528143896}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.60197401, y: 4.79990244, z: 0}
-  m_LocalScale: {x: .0500000007, y: .0500000007, z: 1}
+  m_LocalPosition: {x: -2.67843962, y: 4.79990244, z: 0}
+  m_LocalScale: {x: .0308999699, y: .0308999699, z: .617999613}
   m_Children: []
   m_Father: {fileID: 0}
 --- !u!1 &1630928136

@@ -24,7 +24,6 @@ public class GunControl : MonoBehaviour {
 	}
 
 	public void Fire() {
-//		Collider2D coll = Physics2D.OverlapCircle (new Vector2 (transform.position.x, transform.position.y), radius);
 		Collider2D coll = Physics2D.OverlapArea (new Vector2 (transform.position.x, transform.position.y - boxSize.y / 2), 
 		                                        new Vector2 (transform.position.x + boxSize.x, transform.position.y + boxSize.y / 2));
 		if (coll && coll.tag == "Person Container") {

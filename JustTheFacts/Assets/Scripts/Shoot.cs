@@ -10,7 +10,6 @@ public class Shoot : MonoBehaviour {
 	private Animator anim;
 	private DragControl dragControl;
 	private GameObject gClone;
-	private GameObject gunButton;
 
 	// Use this for initialization
 	void Start () {
@@ -18,13 +17,13 @@ public class Shoot : MonoBehaviour {
 		dragControl = Camera.main.GetComponent<DragControl> ();
 	}
 
+	//TODO: this sucks. why is every pedestrian calling it
 	void OnEnable() {
-		gunButton = GameObject.Find ("gunButton");
-		gunButton.GetComponent<ButtonControl> ().OnClicked += Fire;
+		Utilities.EnableButton ("gunButton", Fire);
 	}
 
 	void OnDisable() {
-		if (gunButton && gunButton.activeInHierarchy) gunButton.GetComponent<ButtonControl> ().OnClicked -= Fire;
+		Utilities.DisableButton ("gunButton", Fire);
 	}
 
 	void Fire () {

@@ -25,9 +25,7 @@ public class ButtonControl : MonoBehaviour {
 				Vector2 mousePos = Input.GetTouch (1).position;
 				Vector3 worldPoint = Camera.main.camera.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, 0f));
 				Collider2D coll = Physics2D.OverlapPoint(new Vector2(worldPoint.x, worldPoint.y));
-				Debug.Log ("fired!");
 				if (coll == collider2D) {
-					Debug.Log ("hit!");
 					gameObject.GetComponent<SpriteRenderer> ().sprite = hoverSprite;
 					clicked = true;
 					if (OnClicked != null) OnClicked();

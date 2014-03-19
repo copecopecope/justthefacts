@@ -6,7 +6,6 @@ public class PersonDetect : MonoBehaviour {
 	public GameObject surprise;
 	public float surpriseDist;
 	public float surpriseTime;
-	private HeadlineControl hlControl;
 
 	[HideInInspector]
 	public bool surprised;
@@ -15,7 +14,6 @@ public class PersonDetect : MonoBehaviour {
 	void Start () {
 		//TODO: refactor
 		surprised = false;
-		hlControl = GameObject.Find ("newspaper").GetComponent<HeadlineControl> ();
 	}
 	
 	// Update is called once per frame
@@ -27,7 +25,7 @@ public class PersonDetect : MonoBehaviour {
 		sClone.transform.parent = collider.transform.parent;
 		sClone.transform.localPosition = new Vector3 (0f, surpriseDist, 0f);
 		collider.GetComponent<PersonDetect> ().surprised = true;
-		hlControl.currScoreVal = Mathf.Max (0, hlControl.currScoreVal-hlControl.detectionPenalty);
+		ScoreManager.manager.currScoreVal = Mathf.Max (0, ScoreManager.manager.currScoreVal-ScoreManager.manager.detectionPenalty);
 		yield return new WaitForSeconds (surpriseTime);
 		Destroy (sClone); 
 		collider.GetComponent<PersonDetect> ().surprised = false;

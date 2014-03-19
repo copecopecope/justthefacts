@@ -55,3 +55,6 @@
 		- UI elements with positions relative to viewport
 * Better graphics!!
 * Audio/music?
+
+#### Refactoring
+* Change headline/crowd control to singleton

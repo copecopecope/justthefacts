@@ -48,11 +48,12 @@
 * Pause 
 * Title screen
 * Tutorial for first time
-* High scores
 * If we actually want to release this
 	- Game Center integration (equiv Android?)
 	- Resolution/screen size independence
 		- UI elements with positions relative to viewport
+	- High scores
+		- (For now just store best score in PlayerPrefs)
 * Better graphics!!
 * Audio/music?
 

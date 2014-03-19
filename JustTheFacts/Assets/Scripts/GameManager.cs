@@ -14,20 +14,26 @@ public class GameManager : MonoBehaviour {
 	}
 
 	private bool paused;
+	private GameObject gameOver;
 
 	// Use this for initialization
 	void Start () {
 		paused = false;
+		gameOver = GameObject.Find ("gameOver");
+		gameOver.SetActive (false);
 	}
 
 	void OnEnable() {
 		Utilities.EnableButton ("pauseButton", Pause);
 		Utilities.EnableButton ("restartButton", StartGame);
+		Utilities.EnableButton ("gameOverRestartButton", RestartGame);
+
 	}
 
 	void OnDisable() {
 		Utilities.DisableButton ("pauseButton", Pause);
 		Utilities.DisableButton ("restartButton", StartGame);
+		Utilities.DisableButton ("gameOverRestartButton", RestartGame);
 	}
 
 	void Pause () {
@@ -42,4 +48,21 @@ public class GameManager : MonoBehaviour {
 	void StartGame() {
 		Application.LoadLevel ("MainScene");
 	}
+
+	public void GameOver() {
+		Pause ();
+		gameOver.SetActive (true);
+//		GameObject.Find ("newspaper").SetActive (false);
+//		GameObject.Find ("score").SetActive (false);
+	}
+
+	public bool IsGameOver() {
+		return gameOver.activeSelf;
+	}
+
+	void RestartGame() {
+		Pause ();
+		StartGame ();
+	}
+
 }

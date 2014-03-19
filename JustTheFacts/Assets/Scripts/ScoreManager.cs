@@ -18,6 +18,7 @@ public class ScoreManager : MonoBehaviour {
 	public int wrongPenalty;
 	public int initialScoreVal;
 	public int dangerThreshold;
+	public float initialPauseTime;
 
 	[HideInInspector]
 	public int currScoreVal;
@@ -38,7 +39,7 @@ public class ScoreManager : MonoBehaviour {
 	
 	IEnumerator DecreaseScore(bool initialPause) {
 		if (initialPause) {
-			yield return new WaitForSeconds (5f);
+			yield return new WaitForSeconds (initialPauseTime);
 		}
 		Penalty (Mathf.RoundToInt (decreasePerSecond * .5f));
 		yield return new WaitForSeconds (.5f);
@@ -65,7 +66,27 @@ public class ScoreManager : MonoBehaviour {
 		currScoreVal = initialScoreVal;
 	}
 
+	void UpdateBestScore() {
+		int best = 0;
+		if (PlayerPrefs.HasKey ("BestScore")) {
+			best = PlayerPrefs.GetInt("BestScore");
+			if (best < scoreVal) {
+				PlayerPrefs.SetInt("BestScore", scoreVal);
+				best = scoreVal;
+			}
+		} else {
+			PlayerPrefs.SetInt ("BestScore", scoreVal);
+			best = scoreVal;
+		}
+		UpdateScoreText (best, GameObject.Find ("gameOverBestScore"), 6);
+	}
+
 	void Update() {
+		if (currScoreVal <= 0 && !GameManager.manager.IsGameOver()) {
+			GameManager.manager.GameOver();
+			UpdateScoreText (scoreVal, GameObject.Find ("gameOverScore"), 6);
+			UpdateBestScore ();
+		}
 		UpdateScoreText (currScoreVal, currScore, 5);
 		UpdateScoreText (scoreVal, score, 6);
 		if (currScoreVal < dangerThreshold) {

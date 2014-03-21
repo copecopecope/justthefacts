@@ -6,17 +6,17 @@ public class PersonControl : MonoBehaviour {
 	public enum PersonRole
 	{
 		RedMan,
+		RedWoman,
 		BlueMan,
+		BlueWoman,
 		GreenMan,
+		GreenWoman,
+		Cop,
+		Celebrity,
 		WhiteMan,
 		YellowMan,
-		RedWoman,
-		BlueWoman,
-		GreenWoman,
 		WhiteWoman,
-		YellowWoman,
-		Cop,
-		Celebrity
+		YellowWoman
 	}
 
 	public PersonRole role;
@@ -59,7 +59,7 @@ public class PersonControl : MonoBehaviour {
 //			role = PersonRole.Normal;
 //		} else {
 			System.Array values = System.Enum.GetValues (typeof(PersonRole));
-			PersonRole newRole = (PersonRole)values.GetValue (Random.Range (1, GameManager.manager.MaxRole()));
+			PersonRole newRole = (PersonRole)values.GetValue (Random.Range (0, GameManager.manager.MaxRole()));
 			role = newRole;
 //		}
 	}

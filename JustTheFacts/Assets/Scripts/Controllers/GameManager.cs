@@ -39,20 +39,22 @@ public class GameManager : MonoBehaviour {
 
 	public int MaxRole() {
 		float numSeconds = Time.timeSinceLevelLoad;
-		if (numSeconds < 10) 
-			return 1;
-		if (numSeconds < 20)
-			return 3;
-		if (numSeconds < 30)
-			return 5;
+		if (numSeconds < 20) 
+			return 4;
+		if (numSeconds < 40)
+			return 6;
+		if (numSeconds < 60)
+			return 8;
 		return 12;
 	}
 
 	public int MaxAction() {
 		float numSeconds = Time.timeSinceLevelLoad;
 		if (numSeconds < 20)
-			return 1;
-		return 2;
+						return 1;
+		if (numSeconds < 40)
+						return 2;
+		return 3;
 	}
 
 	public int MaxPeople() {
@@ -72,16 +74,18 @@ public class GameManager : MonoBehaviour {
 			return .8f;
 		if (numSeconds < 40)
 			return 1.2f;
-		return 1.8f;
+		if (numSeconds < 75)
+			return 1.8f;
+		return 2.5f;
 	}
 
 	public int DecreasePerSecond() {
 		float numSeconds = Time.timeSinceLevelLoad;
 		if (numSeconds < 10)
 			return 10;
-		if (numSeconds < 20)
+		if (numSeconds < 30)
 			return 30;
-		if (numSeconds < 30) 
+		if (numSeconds < 50) 
 			return 50;
 		return 100;
 	}

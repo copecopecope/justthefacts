@@ -25,6 +25,9 @@ public class HeadlineControl : MonoBehaviour {
 	private GameObject headline;
 	private TextMesh headlineTextMesh;
 
+	private CrowdControl cControl; //TODO: singleton (hiss)
+
+
 	private static HeadlineControl _control;
 	public static HeadlineControl control {
 		get {
@@ -40,6 +43,8 @@ public class HeadlineControl : MonoBehaviour {
 		headline = transform.Find ("headline").gameObject;
 		headlineTextMesh = headline.GetComponent<TextMesh> ();
 		updateHeadline = true;
+		cControl = GameObject.Find ("Crowd Control").GetComponent<CrowdControl> ();
+
 	}
 	
 	// Update is called once per frame
@@ -126,8 +131,18 @@ public class HeadlineControl : MonoBehaviour {
 	}
 
 	void GenerateHeadline() {
-		currActorRole = RandomRole (true);
-		currTargetRole = RandomRole (true);
+		GameObject rActor = cControl.PersonInCamera ();
+		if (rActor != null) {
+			currActorRole = rActor.GetComponent<PersonControl> ().role;
+		} else {
+			currActorRole = RandomRole (true);
+		}
+		GameObject rTarget = cControl.PersonInCamera ();
+		if (rTarget != null) {
+			currTargetRole = rTarget.GetComponent<PersonControl> ().role;
+		} else {
+			currTargetRole = RandomRole (true);
+		}
 		currAction = RandomAction ();
 	
 

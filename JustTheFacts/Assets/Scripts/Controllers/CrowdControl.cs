@@ -36,6 +36,7 @@ public class CrowdControl : MonoBehaviour {
 	private float leftBoundX;
 
 
+
 	// Use this for initialization
 	void Start () {
 
@@ -46,6 +47,7 @@ public class CrowdControl : MonoBehaviour {
 		bottomBoundY = Camera.main.ViewportToWorldPoint(new Vector3(0, 1-roadPercent, 0)).y;
 		rightBoundX = Camera.main.ViewportToWorldPoint (new Vector3 (1, 0, 0)).x;
 		leftBoundX = Camera.main.ViewportToWorldPoint (new Vector3 (0, 0, 0)).x;
+
 		StartCoroutine (Spawn ());
 	
 	}
@@ -58,6 +60,24 @@ public class CrowdControl : MonoBehaviour {
 	public void setInitalPosition(GameObject p) {
 		float boundsX = .3f * (rightBoundX - leftBoundX);
 		p.transform.position = new Vector3 ((transform.position.x - boundsX) + fluct (boundsX), transform.position.y + fluct (crowdSpread), transform.position.z);
+	}
+
+	bool InCamera(GameObject p) {
+		return p.transform.position.x > leftBoundX-1 && p.transform.position.x < rightBoundX-1;
+	}
+
+	public GameObject PersonInCamera() {
+		GameObject p = null;
+		int maxIters = 5;
+		int iter = 0;
+		if (crowd.Count > 0) {
+				do {
+						int randIdx = Random.Range (0, crowd.Count);
+						p = crowd [randIdx];
+						iter++;
+				} while (!InCamera (p) || iter < maxIters);
+		}
+		return p;
 	}
 
 	IEnumerator Spawn () {

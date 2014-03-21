@@ -94,7 +94,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void StartGame() {
-		Application.LoadLevel ("MainScene");
+		Application.LoadLevel ("Title");
 	}
 
 	public void GameOver() {
@@ -108,7 +108,7 @@ public class GameManager : MonoBehaviour {
 
 	void RestartGame() {
 		Pause ();
-		StartGame ();
+		Application.LoadLevel ("MainScene");
 	}
 
 }

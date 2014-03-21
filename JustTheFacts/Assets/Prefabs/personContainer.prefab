@@ -146,6 +146,8 @@ MonoBehaviour:
   greenWoman: {fileID: 21300016, guid: af54484431ed0413483b4fe7297f583f, type: 3}
   yellowWoman: {fileID: 21300012, guid: af54484431ed0413483b4fe7297f583f, type: 3}
   whiteWoman: {fileID: 21300018, guid: af54484431ed0413483b4fe7297f583f, type: 3}
+  cop: {fileID: 21300002, guid: 5897c3a14e14849369f20b100de595d0, type: 3}
+  celeb: {fileID: 21300000, guid: 5897c3a14e14849369f20b100de595d0, type: 3}
   speed: 0
 --- !u!114 &11400002
 MonoBehaviour:

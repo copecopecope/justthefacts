@@ -68,7 +68,6 @@ public class CrowdControl : MonoBehaviour {
 			crowd.Add (newPerson);
 			numPeople++;
 			PersonControl pControl = newPerson.GetComponent<PersonControl> ();
-			pControl.SetRandomType ();
 			pControl.setRandomRole ();
 			setInitalPosition (newPerson);
 			newPerson.rigidbody2D.velocity = new Vector2 (0f, pControl.speed);

@@ -187,7 +187,7 @@ MonoBehaviour:
   angleOfSight: 1.30799997
   ignoreWeight: .100000001
   fluctuationFactor: 2
-  roadPercent: .699999988
+  roadPercent: .720000029
   wallAvoidance: 10
   crA: .200000003
   crB: 3
@@ -294,7 +294,7 @@ SpriteRenderer:
   m_SortingLayer: -2
   m_SortingOrder: 0
   m_SortingLayerID: 1828473973
-  m_Sprite: {fileID: 21300000, guid: da03d4a969f974371b8d96bbddc485fb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6be46f641f5184c7cab8d85ef502d85e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!4 &828403658
 Transform:
@@ -303,8 +303,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 828403656}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: -.141864657, z: 5}
-  m_LocalScale: {x: .656014264, y: .656014264, z: .656014264}
+  m_LocalPosition: {x: 1.09413552, y: -.111472249, z: 5}
+  m_LocalScale: {x: .580009878, y: .580009878, z: .580009878}
   m_Children: []
   m_Father: {fileID: 0}
 --- !u!1 &855834490
@@ -397,7 +397,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gun: {fileID: 100000, guid: 551d81bde7a364f138e47c90b9e704c4, type: 2}
-  gunPosition: {x: -2, y: 0, z: 0}
+  gunPosition: {x: -1, y: 0, z: 0}
   gunDestroyTime: .5
 --- !u!1 &1040775834
 GameObject:
@@ -604,7 +604,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   updateHeadline: 0
-  currActorType: 0
+  currActorRole: 0
   currTargetRole: 0
   currAction: 0
 --- !u!1 &1131129175
@@ -831,7 +831,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1488721409
 Transform:
   m_ObjectHideFlags: 0

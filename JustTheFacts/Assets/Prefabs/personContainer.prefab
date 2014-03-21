@@ -46,8 +46,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.27384663, y: .0855190456, z: 0}
-  m_LocalScale: {x: .200000003, y: .200000003, z: 1.00000012}
+  m_LocalPosition: {x: 2.9358542, y: -1.27664351, z: 0}
+  m_LocalScale: {x: .25, y: .25, z: 1.00000012}
   m_Children:
   - {fileID: 400002}
   m_Father: {fileID: 0}
@@ -135,15 +135,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b38ce538368c54019ad46a06b7a7c434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
   role: 0
-  normal: {fileID: 21300000, guid: 6532c690ee4144f4a82626f58e64c68d, type: 3}
-  old: {fileID: 21300002, guid: 6532c690ee4144f4a82626f58e64c68d, type: 3}
-  celeb: {fileID: 21300004, guid: 6532c690ee4144f4a82626f58e64c68d, type: 3}
-  polit: {fileID: 21300006, guid: 6532c690ee4144f4a82626f58e64c68d, type: 3}
+  redMan: {fileID: 21300000, guid: af54484431ed0413483b4fe7297f583f, type: 3}
+  blueMan: {fileID: 21300004, guid: af54484431ed0413483b4fe7297f583f, type: 3}
+  greenMan: {fileID: 21300006, guid: af54484431ed0413483b4fe7297f583f, type: 3}
+  yellowMan: {fileID: 21300002, guid: af54484431ed0413483b4fe7297f583f, type: 3}
+  whiteMan: {fileID: 21300008, guid: af54484431ed0413483b4fe7297f583f, type: 3}
+  redWoman: {fileID: 21300010, guid: af54484431ed0413483b4fe7297f583f, type: 3}
+  blueWoman: {fileID: 21300014, guid: af54484431ed0413483b4fe7297f583f, type: 3}
+  greenWoman: {fileID: 21300016, guid: af54484431ed0413483b4fe7297f583f, type: 3}
+  yellowWoman: {fileID: 21300012, guid: af54484431ed0413483b4fe7297f583f, type: 3}
+  whiteWoman: {fileID: 21300018, guid: af54484431ed0413483b4fe7297f583f, type: 3}
   speed: 0
-  minSpeed: .349999994
-  maxSpeed: 1.39999998
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -191,7 +194,7 @@ SpriteRenderer:
   m_SortingLayer: -1
   m_SortingOrder: 0
   m_SortingLayerID: 1674049435
-  m_Sprite: {fileID: 21300000, guid: 6532c690ee4144f4a82626f58e64c68d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9a8af3408136f4d6b8e61a16740e498b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:

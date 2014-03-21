@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour {
 		Utilities.DisableButton ("gameOverRestartButton", RestartGame);
 	}
 
-	public int MaxType() {
+	public int MaxRole() {
 		float numSeconds = Time.timeSinceLevelLoad;
 		if (numSeconds < 10) 
 			return 1;
@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour {
 			return 3;
 		if (numSeconds < 30)
 			return 5;
-		return 7;
+		return 12;
 	}
 
 	public int MaxAction() {
@@ -53,13 +53,6 @@ public class GameManager : MonoBehaviour {
 		if (numSeconds < 20)
 			return 1;
 		return 2;
-	}
-
-	public int MaxRole() {
-		float numSeconds = Time.timeSinceLevelLoad;
-		if (numSeconds < 10)
-			return 2;
-		return 4;
 	}
 
 	public int MaxPeople() {

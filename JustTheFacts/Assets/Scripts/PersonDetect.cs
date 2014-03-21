@@ -28,7 +28,7 @@ public class PersonDetect : MonoBehaviour {
 		ScoreManager.manager.currScoreVal = Mathf.Max (0, ScoreManager.manager.currScoreVal-ScoreManager.manager.detectionPenalty);
 		yield return new WaitForSeconds (surpriseTime);
 		Destroy (sClone); 
-		collider.GetComponent<PersonDetect> ().surprised = false;
+		if (collider != null) collider.GetComponent<PersonDetect> ().surprised = false;
 	}
 
 	void OnTriggerEnter2D(Collider2D collider) {

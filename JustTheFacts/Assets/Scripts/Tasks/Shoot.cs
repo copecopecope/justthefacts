@@ -7,17 +7,14 @@ public class Shoot : MonoBehaviour {
 	public Vector3 gunPosition;
 	public float gunDestroyTime;
 
-	private Animator anim;
 	private DragControl dragControl;
 	private GameObject gClone;
 
 	// Use this for initialization
 	void Start () {
-		anim = gameObject.transform.GetChild (0).GetComponent<Animator> ();
 		dragControl = Camera.main.GetComponent<DragControl> ();
 	}
 
-	//TODO: this sucks. why is every pedestrian calling it
 	void OnEnable() {
 		Utilities.EnableButton ("gunButton", Fire);
 	}
@@ -27,11 +24,11 @@ public class Shoot : MonoBehaviour {
 	}
 
 	void Fire () {
-		if (!gClone && dragControl.obj == gameObject) {
+		if (!gClone && dragControl.obj != null) {
 			gClone = (GameObject)Instantiate (gun);
-			gClone.transform.parent = gameObject.transform;
+			gClone.transform.parent = dragControl.obj.transform;
 			gClone.transform.localPosition = gunPosition;
-			anim.SetTrigger ("Fire");
+			dragControl.obj.transform.GetChild (0).GetComponent<Animator>().SetTrigger ("Fire");
 			gClone.GetComponentInChildren<GunControl> ().Fire ();
 			Destroy (gClone, gunDestroyTime);
 		}

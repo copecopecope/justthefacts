@@ -7,7 +7,11 @@ public class PersonControl : MonoBehaviour {
 	{
 		Red,
 		Blue,
-		Green
+		Green,
+		Purple,
+		Pink,
+		Gold,
+		Orange
 	}
 
 	public enum PersonRole
@@ -31,9 +35,6 @@ public class PersonControl : MonoBehaviour {
 	[HideInInspector]
 	public float speed;
 
-	public float minSpeed;
-	public float maxSpeed;
-
 	private GameObject child;
 	private CrowdControl cControl;
 	
@@ -42,22 +43,25 @@ public class PersonControl : MonoBehaviour {
 		child = transform.GetChild (0).gameObject;
 		cControl = GameObject.Find ("Crowd Control").GetComponent<CrowdControl> ();
 		// TODO: Gaussitize
-		speed = Random.Range (minSpeed, maxSpeed);
+		speed = Random.Range (GameManager.manager.Speed ()-.5f, GameManager.manager.Speed ()+.5f);
 	}
 
 	public void SetRandomType() {
 		System.Array values = System.Enum.GetValues(typeof(PersonType));
-		PersonType newType = (PersonType)values.GetValue (Random.Range (0, values.Length));
+		PersonType newType = (PersonType)values.GetValue (Random.Range (0, GameManager.manager.MaxType()));
 		type = newType;
 	}
 
 	public void setRandomRole() {
 		float prob = Random.Range (0f, 1f);
-		if (prob < normalProb) {
+		Debug.Log (prob);
+		Debug.Log (normalProb);
+		if (prob < .75) { //TODO: fix normalProb
+			Debug.Log ("normal!");
 			role = PersonRole.Normal;
 		} else {
 			System.Array values = System.Enum.GetValues (typeof(PersonRole));
-			PersonRole newRole = (PersonRole)values.GetValue (Random.Range (1, values.Length));
+			PersonRole newRole = (PersonRole)values.GetValue (Random.Range (1, GameManager.manager.MaxRole()));
 			role = newRole;
 		}
 	}
@@ -67,6 +71,10 @@ public class PersonControl : MonoBehaviour {
 		cControl.numPeople--;
 		cControl.removeList.Add (gameObject);
 	}
+
+	public void AcceptProposal() {
+		child.GetComponent<Animator>().SetTrigger ("Propose");
+	}
 	
 	// Update is called once per frame
 	void Update () {
@@ -74,13 +82,25 @@ public class PersonControl : MonoBehaviour {
 		switch (type) 
 		{
 			case PersonType.Red:
-				child.renderer.material.color = new Color(1f,.6f, .43f);
+				child.renderer.material.color = new Color(1f,.23f, .23f);
 				break;
 			case PersonType.Green:
 				child.renderer.material.color = new Color(.48f, .96f, .22f);
 				break;
 			case PersonType.Blue:
 				child.renderer.material.color = new Color(.47f, .96f, .82f);
+				break;
+			case PersonType.Purple:
+				child.renderer.material.color = new Color(.36f, .05f, .53f);
+				break;
+			case PersonType.Pink:
+				child.renderer.material.color = new Color(1f, .52f, .9f);
+				break;
+			case PersonType.Orange:
+				child.renderer.material.color = new Color(1f, .61f, .23f);
+				break;
+			case PersonType.Gold:
+				child.renderer.material.color = new Color(.98f, .84f, .18f);
 				break;
 		}
 

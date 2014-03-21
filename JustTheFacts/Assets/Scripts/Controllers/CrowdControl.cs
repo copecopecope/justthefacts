@@ -63,7 +63,7 @@ public class CrowdControl : MonoBehaviour {
 	IEnumerator Spawn () {
 		yield return new WaitForSeconds(crowdSpawnRate);
 
-		if (numPeople < maxPeople) {
+		if (numPeople < GameManager.manager.MaxPeople()) {
 			GameObject newPerson = (GameObject)Instantiate (person);
 			crowd.Add (newPerson);
 			numPeople++;

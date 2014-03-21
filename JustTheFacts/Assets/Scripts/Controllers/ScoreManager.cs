@@ -41,7 +41,7 @@ public class ScoreManager : MonoBehaviour {
 		if (initialPause) {
 			yield return new WaitForSeconds (initialPauseTime);
 		}
-		Penalty (Mathf.RoundToInt (decreasePerSecond * .5f));
+		Penalty (Mathf.RoundToInt (GameManager.manager.DecreasePerSecond() * .5f));
 		yield return new WaitForSeconds (.5f);
 		StartCoroutine (DecreaseScore(false));
 	}

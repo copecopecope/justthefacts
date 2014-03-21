@@ -2,8 +2,11 @@
 
 #### Crowd Control
 * Enable multi-touch (not necessary?)
+	- Fix how multi touch works with buttons!!!
 * Play with simulation some more
 	- Attractive forces?
+* Control scheme not awesome
+	- Tap to select, hold to drag, then fire
 * Different people
 	- With different odds, changes as game goes on
 
@@ -14,9 +17,8 @@
 
 #### Tasks
 * Dragging one ped to another
-	- Assassinations (implemented)
-		- Fix collision detection
-		- Actual bullet??
+	- Assassinations 
+		- Fix collision detection (actual bullet?)
 	- Proposals
 	- Nabs
 * Rare tasks
@@ -27,8 +29,6 @@
 
 #### Scoring
 * Penalties
-	- Deduction for time/inaccuracy/being noticed (implemented)
-	- End game if score reaches 0
 	- Different initial scores for different task dificulties?
 
 #### Optimizations
@@ -38,6 +38,7 @@
 * Instantiating so many people is a huge tax -- fix this!
 	- Instantiate all N at beginning
 	- Move people from right to left
+* Still need to optimize crowd physics
 
 #### Gameplay ideas
 * Introduce new tasks over time
@@ -45,17 +46,14 @@
 * Increase scoring decrease rate over time
 
 #### Peripheraff
-* Pause 
 * Title screen
 * Tutorial for first time
 * If we actually want to release this
 	- Game Center integration (equiv Android?)
 	- Resolution/screen size independence
 		- UI elements with positions relative to viewport
-	- High scores
-		- (For now just store best score in PlayerPrefs)
 * Better graphics!!
 * Audio/music?
 
 #### Refactoring
-* Change headline/crowd control to singleton
+* Change headline/crowd/drag control to singleton

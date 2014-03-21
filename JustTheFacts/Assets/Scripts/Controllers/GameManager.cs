@@ -15,11 +15,12 @@ public class GameManager : MonoBehaviour {
 
 	private bool paused;
 	private GameObject gameOver;
-
+	
 	// Use this for initialization
 	void Start () {
 		paused = false;
 		gameOver = GameObject.Find ("gameOver");
+		gameOver.transform.position = new Vector3 (0f, 0f, -2f); // off to the side for dev
 		gameOver.SetActive (false);
 	}
 
@@ -34,6 +35,60 @@ public class GameManager : MonoBehaviour {
 		Utilities.DisableButton ("pauseButton", Pause);
 		Utilities.DisableButton ("restartButton", StartGame);
 		Utilities.DisableButton ("gameOverRestartButton", RestartGame);
+	}
+
+	public int MaxType() {
+		float numSeconds = Time.timeSinceLevelLoad;
+		if (numSeconds < 10) 
+			return 1;
+		if (numSeconds < 20)
+			return 3;
+		if (numSeconds < 30)
+			return 5;
+		return 7;
+	}
+
+	public int MaxAction() {
+		float numSeconds = Time.timeSinceLevelLoad;
+		if (numSeconds < 20)
+			return 1;
+		return 2;
+	}
+
+	public int MaxRole() {
+		float numSeconds = Time.timeSinceLevelLoad;
+		if (numSeconds < 10)
+			return 2;
+		return 4;
+	}
+
+	public int MaxPeople() {
+		float numSeconds = Time.timeSinceLevelLoad;
+		if (numSeconds < 10)
+			return 15;
+		if (numSeconds < 20)
+			return 30;
+		return 40;
+	}
+
+	public float Speed() {
+		float numSeconds = Time.timeSinceLevelLoad;
+		if (numSeconds < 20)
+			return 1f;
+		if (numSeconds < 40)
+			return 1.5f;
+		return 2f;
+	}
+
+	public int DecreasePerSecond() {
+		float numSeconds = Time.timeSinceLevelLoad;
+		if (numSeconds < 10)
+			return 10;
+		if (numSeconds < 20)
+			return 30;
+		if (numSeconds < 30) 
+			return 50;
+		return 100;
 	}
 
 	void Pause () {
@@ -52,8 +107,6 @@ public class GameManager : MonoBehaviour {
 	public void GameOver() {
 		Pause ();
 		gameOver.SetActive (true);
-//		GameObject.Find ("newspaper").SetActive (false);
-//		GameObject.Find ("score").SetActive (false);
 	}
 
 	public bool IsGameOver() {

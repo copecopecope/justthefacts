@@ -74,6 +74,10 @@ public class PersonControl : MonoBehaviour {
 	public void AcceptProposal() {
 		child.GetComponent<Animator>().SetTrigger ("AcceptPropose");
 	}
+
+	public void AcceptCuffs() {
+		child.GetComponent<Animator>().SetTrigger ("AcceptCuffs");
+	}
 	
 	// Update is called once per frame
 	void Update () {

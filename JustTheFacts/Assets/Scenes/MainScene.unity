@@ -825,6 +825,7 @@ GameObject:
   - 114: {fileID: 1488721412}
   - 212: {fileID: 1488721411}
   - 58: {fileID: 1488721410}
+  - 114: {fileID: 1488721413}
   m_Layer: 0
   m_Name: cuffsButton
   m_TagString: Untagged
@@ -890,7 +891,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultSprite: {fileID: 21300002, guid: 4857a2840f5ca457382ae27fd5e56192, type: 3}
   hoverSprite: {fileID: 21300008, guid: 4857a2840f5ca457382ae27fd5e56192, type: 3}
-  debugKey: g
+  debugKey: n
+--- !u!114 &1488721413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1488721408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61bbe0be403ea403b9960ed360012cfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cuffs: {fileID: 100000, guid: 05edd065537674e2e8bbfdf0f7ff7cb5, type: 2}
+  cuffsPosition: {x: 1, y: 0, z: 0}
+  cuffsDestroyTime: .5
 --- !u!1 &1528143896
 GameObject:
   m_ObjectHideFlags: 0

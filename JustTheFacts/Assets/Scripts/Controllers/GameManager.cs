@@ -58,8 +58,10 @@ public class GameManager : MonoBehaviour {
 	public int MaxPeople() {
 		float numSeconds = Time.timeSinceLevelLoad;
 		if (numSeconds < 10)
-			return 15;
+			return 10;
 		if (numSeconds < 20)
+			return 20;
+		if (numSeconds < 30)
 			return 30;
 		return 40;
 	}
@@ -67,10 +69,10 @@ public class GameManager : MonoBehaviour {
 	public float Speed() {
 		float numSeconds = Time.timeSinceLevelLoad;
 		if (numSeconds < 20)
-			return 1f;
+			return .8f;
 		if (numSeconds < 40)
-			return 1.5f;
-		return 2f;
+			return 1.2f;
+		return 1.8f;
 	}
 
 	public int DecreasePerSecond() {

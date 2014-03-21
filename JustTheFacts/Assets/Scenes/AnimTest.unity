@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   surprise: {fileID: 100000, guid: c6dd47a7f87df4282a99445a034b1bf7, type: 2}
-  surpriseDist: 4
+  surpriseDist: 5
   surpriseTime: .5
   surprised: 0
 --- !u!58 &859106418

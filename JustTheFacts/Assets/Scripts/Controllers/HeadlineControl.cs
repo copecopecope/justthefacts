@@ -6,7 +6,8 @@ public class HeadlineControl : MonoBehaviour {
 	public enum HeadlineAction
 	{
 		Kill,
-		Propose
+		Propose,
+		Nab
 	}
 
 	[HideInInspector]
@@ -116,6 +117,9 @@ public class HeadlineControl : MonoBehaviour {
 			break;
 		case HeadlineAction.Propose:
 			actionString = "weds";
+			break;
+		case HeadlineAction.Nab:
+			actionString = "nabs";
 			break;
 		}
 		return actionString;

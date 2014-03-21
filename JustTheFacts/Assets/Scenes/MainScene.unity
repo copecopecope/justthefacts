@@ -373,7 +373,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultSprite: {fileID: 21300000, guid: 4857a2840f5ca457382ae27fd5e56192, type: 3}
   hoverSprite: {fileID: 21300006, guid: 4857a2840f5ca457382ae27fd5e56192, type: 3}
-  debugKey: g
+  debugKey: a
 --- !u!4 &855834494
 Transform:
   m_ObjectHideFlags: 0
@@ -891,7 +891,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultSprite: {fileID: 21300002, guid: 4857a2840f5ca457382ae27fd5e56192, type: 3}
   hoverSprite: {fileID: 21300008, guid: 4857a2840f5ca457382ae27fd5e56192, type: 3}
-  debugKey: n
+  debugKey: d
 --- !u!114 &1488721413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1431,7 +1431,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultSprite: {fileID: 21300004, guid: 4857a2840f5ca457382ae27fd5e56192, type: 3}
   hoverSprite: {fileID: 21300010, guid: 4857a2840f5ca457382ae27fd5e56192, type: 3}
-  debugKey: m
+  debugKey: s
 --- !u!114 &2067762637
 MonoBehaviour:
   m_ObjectHideFlags: 0

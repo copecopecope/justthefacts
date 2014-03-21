@@ -50,7 +50,8 @@ public class HeadlineControl : MonoBehaviour {
 
 	HeadlineAction RandomAction() {
 		System.Array values = System.Enum.GetValues(typeof(HeadlineAction));
-		return (HeadlineAction)values.GetValue (Random.Range (0, GameManager.manager.MaxAction()));
+//		return (HeadlineAction)values.GetValue (Random.Range (0, GameManager.manager.MaxAction()));
+		return HeadlineAction.Propose;
 	}
 
 	PersonControl.PersonType RandomType() {
@@ -93,10 +94,10 @@ public class HeadlineControl : MonoBehaviour {
 	}
 
 	public bool IsMatch(GameObject actor, Collider2D targetColl, HeadlineAction action) {
-		Debug.Log (actor);
-		bool actorCorrect = currActorType == actor.transform.parent.GetComponent<PersonControl> ().type;
-		Debug.Log (currTargetRole);
-		Debug.Log (targetColl);
+//		Debug.Log (actor);
+		bool actorCorrect = currActorType == actor.GetComponent<PersonControl> ().type;
+//		Debug.Log (currTargetRole);
+//		Debug.Log (targetColl);
 		bool targetCorrect = currTargetRole == targetColl.GetComponent<PersonControl> ().role;
 		bool actionCorrect = action == currAction;
 		return actorCorrect && targetCorrect && actionCorrect;

@@ -90,7 +90,7 @@ public class CrowdControl : MonoBehaviour {
 			p.transform.Find ("person").renderer.sortingOrder = sortingOrder;
 			float radius = p.GetComponent<CircleCollider2D>().radius;
 			if (p.transform.position.x > rightBoundX+radius*2) {	
-				p.GetComponent<PersonControl>().Kill ();
+				p.GetComponent<PersonControl>().AcceptDeath ();
 			}
 		}
 

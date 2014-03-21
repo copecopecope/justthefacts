@@ -29,7 +29,7 @@ public class Shoot : MonoBehaviour {
 			gClone.transform.parent = dragControl.obj.transform;
 			gClone.transform.localPosition = gunPosition;
 			dragControl.obj.transform.GetChild (0).GetComponent<Animator>().SetTrigger ("Fire");
-			gClone.GetComponentInChildren<GunControl> ().Fire ();
+			gClone.GetComponentInChildren<TaskControl> ().Act (gClone, HeadlineControl.HeadlineAction.Kill, "AcceptDeath");
 			Destroy (gClone, gunDestroyTime);
 		}
 	}

@@ -28,8 +28,7 @@ public class Propose : MonoBehaviour {
 			rClone = (GameObject)Instantiate (ring);
 			rClone.transform.parent = dragControl.obj.transform;
 			rClone.transform.localPosition = ringPosition;
-//			dragControl.obj.transform.GetChild (0).GetComponent<Animator>().SetTrigger ("Propose");
-			rClone.GetComponentInChildren<RingControl> ().Propose ();
+			rClone.GetComponent<TaskControl>().Act (rClone, HeadlineControl.HeadlineAction.Propose, "AcceptProposal");
 			Destroy (rClone, ringDestroyTime);
 		}
 	}

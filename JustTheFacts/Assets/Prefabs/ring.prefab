@@ -95,10 +95,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 844b58958be6442d5823dc7b857a26d8, type: 3}
+  m_Script: {fileID: 11500000, guid: 49ba699711e1a48e9b3a25fade772f51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boxSize: {x: 1, y: .200000003}
+  boxSize: {x: -1.20000005, y: .400000006}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

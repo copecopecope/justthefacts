@@ -54,10 +54,10 @@ public class PersonControl : MonoBehaviour {
 
 	public void setRandomRole() {
 		float prob = Random.Range (0f, 1f);
-		Debug.Log (prob);
-		Debug.Log (normalProb);
+//		Debug.Log (prob);
+//		Debug.Log (normalProb);
 		if (prob < .75) { //TODO: fix normalProb
-			Debug.Log ("normal!");
+//			Debug.Log ("normal!");
 			role = PersonRole.Normal;
 		} else {
 			System.Array values = System.Enum.GetValues (typeof(PersonRole));
@@ -66,7 +66,8 @@ public class PersonControl : MonoBehaviour {
 		}
 	}
 
-	public void Kill() {
+	//Dark.
+	public void AcceptDeath() {
 		//TODO: trigger death animation
 		cControl.numPeople--;
 		cControl.removeList.Add (gameObject);

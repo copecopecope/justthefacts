@@ -50,8 +50,7 @@ public class HeadlineControl : MonoBehaviour {
 
 	HeadlineAction RandomAction() {
 		System.Array values = System.Enum.GetValues(typeof(HeadlineAction));
-//		return (HeadlineAction)values.GetValue (Random.Range (0, GameManager.manager.MaxAction()));
-		return HeadlineAction.Propose;
+		return (HeadlineAction)values.GetValue (Random.Range (0, GameManager.manager.MaxAction()));
 	}
 
 	PersonControl.PersonType RandomType() {

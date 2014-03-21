@@ -67,6 +67,44 @@ public class HeadlineControl : MonoBehaviour {
 
 	string RoleToString(PersonControl.PersonRole role) {
 		string name = "";
+		switch (role) {
+				case PersonControl.PersonRole.BlueMan:
+						name = "Man in blue";
+						break;
+				case PersonControl.PersonRole.BlueWoman:
+						name = "Woman in blue";
+						break;
+				case PersonControl.PersonRole.Celebrity:
+						name = "Celebrity";
+						break;
+				case PersonControl.PersonRole.Cop:
+						name = "Cop";
+						break;
+				case PersonControl.PersonRole.GreenMan:
+						name = "Man in green";
+						break;
+				case PersonControl.PersonRole.GreenWoman:
+						name = "Woman in green";
+						break;
+				case PersonControl.PersonRole.RedMan:
+						name = "Man in red";
+						break;
+				case PersonControl.PersonRole.RedWoman:
+						name = "Woman in red";
+						break;
+				case PersonControl.PersonRole.WhiteMan:
+						name = "Man in white";
+						break;
+				case PersonControl.PersonRole.WhiteWoman:
+						name = "Woman in white";
+						break;
+				case PersonControl.PersonRole.YellowMan:
+						name = "Man in yellow";
+						break;
+				case PersonControl.PersonRole.YellowWoman:
+						name = "Woman in yellow";
+						break;
+				}
 		return name;
 	}
 
@@ -89,7 +127,7 @@ public class HeadlineControl : MonoBehaviour {
 		currAction = RandomAction ();
 	
 
-		currHeadline = currActorRole.ToString () + " " + ActionToString (currAction) + " " + currTargetRole.ToString();
+		currHeadline = RoleToString(currActorRole) + " " + ActionToString (currAction) + " " + RoleToString(currTargetRole);
 		currHeadline = currHeadline.ToUpper();
 		headlineTextMesh.text = currHeadline;
 

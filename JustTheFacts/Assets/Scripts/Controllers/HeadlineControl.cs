@@ -77,7 +77,7 @@ public class HeadlineControl : MonoBehaviour {
 			actionString = "kills";
 			break;
 		case HeadlineAction.Propose:
-			actionString = "proposes to";
+			actionString = "weds";
 			break;
 		}
 		return actionString;

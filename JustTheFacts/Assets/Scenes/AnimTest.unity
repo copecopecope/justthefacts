@@ -142,7 +142,7 @@ SpriteRenderer:
   m_SortingLayer: -1
   m_SortingOrder: 0
   m_SortingLayerID: 1674049435
-  m_Sprite: {fileID: 21300000, guid: 9a8af3408136f4d6b8e61a16740e498b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: af54484431ed0413483b4fe7297f583f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &859106417
 MonoBehaviour:
@@ -261,11 +261,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   role: 0
-  redMan: {fileID: 21300000, guid: 9a8af3408136f4d6b8e61a16740e498b, type: 3}
-  blueMan: {fileID: 21300004, guid: 9a8af3408136f4d6b8e61a16740e498b, type: 3}
-  greenMan: {fileID: 21300006, guid: 9a8af3408136f4d6b8e61a16740e498b, type: 3}
-  yellowMan: {fileID: 21300002, guid: 9a8af3408136f4d6b8e61a16740e498b, type: 3}
-  whiteMan: {fileID: 21300008, guid: 9a8af3408136f4d6b8e61a16740e498b, type: 3}
+  redMan: {fileID: 21300000, guid: af54484431ed0413483b4fe7297f583f, type: 3}
+  blueMan: {fileID: 21300004, guid: af54484431ed0413483b4fe7297f583f, type: 3}
+  greenMan: {fileID: 21300006, guid: af54484431ed0413483b4fe7297f583f, type: 3}
+  yellowMan: {fileID: 21300002, guid: af54484431ed0413483b4fe7297f583f, type: 3}
+  whiteMan: {fileID: 21300008, guid: af54484431ed0413483b4fe7297f583f, type: 3}
+  redWoman: {fileID: 21300010, guid: af54484431ed0413483b4fe7297f583f, type: 3}
+  blueWoman: {fileID: 21300014, guid: af54484431ed0413483b4fe7297f583f, type: 3}
+  greenWoman: {fileID: 21300016, guid: af54484431ed0413483b4fe7297f583f, type: 3}
+  yellowWoman: {fileID: 21300012, guid: af54484431ed0413483b4fe7297f583f, type: 3}
+  whiteWoman: {fileID: 21300018, guid: af54484431ed0413483b4fe7297f583f, type: 3}
+  cop: {fileID: 21300002, guid: 5897c3a14e14849369f20b100de595d0, type: 3}
+  celeb: {fileID: 21300000, guid: 5897c3a14e14849369f20b100de595d0, type: 3}
   speed: 0
 --- !u!50 &1199384421
 Rigidbody2D:
@@ -303,7 +310,7 @@ Transform:
   m_GameObject: {fileID: 1199384419}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .300000012, y: .300000012, z: 1.00000012}
+  m_LocalScale: {x: .25, y: .25, z: 1.00000012}
   m_Children:
   - {fileID: 859106412}
   m_Father: {fileID: 0}
@@ -574,6 +581,11 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 21200000, guid: a05e2fa9579aa46c4b31094ca9a71a0a, type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: af54484431ed0413483b4fe7297f583f,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a05e2fa9579aa46c4b31094ca9a71a0a, type: 2}
   m_RootGameObject: {fileID: 1199384419}
